@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function () {
+
 /**
  * DOM SELECTORS
  */
@@ -66,7 +68,7 @@ const pads = [
  */
 
 padContainer.addEventListener("click", padHandler);
-startButton.addEventListener("click", startButtonHandler)
+startButton.addEventListener("click", startButtonHandler);
 
 // TODO: Add an event listener `startButtonHandler()` to startButton.
 
@@ -221,7 +223,7 @@ function activatePad(color) {
   const pad = pads.find(pad => pad.color === color);
   pad.selector.classList.add("activated");
   pad.sound.play();
-  setTimeout(() => pad.selector.classList.remove("activated"), 500)
+  setTimeout(() => pad.selector.classList.remove("activated"), 500);
 }
 
 /**
@@ -240,7 +242,7 @@ function activatePad(color) {
 
 function activatePads(sequence) {
   // TODO: Write your code here.
-  sequence.forEach((color, randomIndex) => {
+  sequence.forEach((color, index) => {
     setTimeout(() => activatePad(color), (index + 1) * 1000); // if tests fail, change 1000 to 600
   });
 }
@@ -319,9 +321,9 @@ function checkPress(color) {
   const index = playerSequence.length - 1;
   const remainingPresses = computerSequence.length - playerSequence.length;
   statusSpan.textContent = `${remainingPresses} remaining presses left in this round`;
-  if ((computerSequence[index] !== playerSequence[index])) {
-    statusSpan.textContent = "Game over";
-    resetGame();
+  if (computerSequence[index] !== playerSequence[index]) {
+    resetGame("Game over");
+    return;
   } if (remainingPresses === 0) {
     checkRound();
   } 
@@ -345,16 +347,14 @@ function checkPress(color) {
 
 function checkRound() {
   // TODO: Write your code here.
-  if (playerSequence.length === maxRoundCount.length) {
+  if (playerSequence.length === maxRoundCount) {
     resetGame("Congrats! You won!");
     return;
   } else {
-    roundCount += 1;
+    roundCount++;
     playerSequence = [];
     statusSpan.textContent = "Nice! Keep going!";
-    setTimeout(() => {
-      playComputerTurn();
-    }, 1000);
+    setTimeout(() => playComputerTurn(), 1000);
   }
 }
 
@@ -379,6 +379,7 @@ function resetGame(text) {
   statusSpan.classList.add("hidden");
   padContainer.classList.add("unclickable");
 }
+});
 
 /**
  * Please do not modify the code below.
