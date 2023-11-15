@@ -277,7 +277,7 @@ function playComputerTurn() {
   heading.textContent = `Round ${roundCount} of ${maxRoundCount}`;
   computerSequence.push(getRandomItem(pads).color)
   activatePads(computerSequence);
-  setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000); // 5
+  setTimeout(() => playHumanTurn(roundCount), roundCount * 800 + 2000); // 5
 }
 
 /**
